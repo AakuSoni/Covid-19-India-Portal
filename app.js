@@ -98,11 +98,7 @@ app.get('/states/', authenticateToken, async (request, response) => {
     SELECT 
     *
     FROM 
-    state;
-    
-    
-    
-    `
+    state;`;
   const statesArray = await database.all(getStatesQuery)
   response.send(
     statesArray.map(eachState =>
@@ -119,9 +115,7 @@ app.get('/states/:stateId/', authenticateToken, async (request, response) => {
     FROM
     state
     WHERE
-    state_id = ${stateId};
-    
-    `
+    state_id = ${stateId};`;
   const state = await database.get(getStateQuery)
   response.send(convertStateDbObjectToResponseObject(state))
 })
@@ -154,10 +148,7 @@ app.post('/districts/', authenticateToken, async (request, response) => {
   response.send('District Successfully Added')
 })
 
-app.delete(
-  '/districts/:districtId/',
-  authenticateToken,
-  async (request, response) => {
+app.delete('/districts/:districtId/', authenticateToken, async (request, response) => {
     const {districtId} = request.params
     const deleteDistrictQuery = `DELETE FROM district WHERE district_id = ${districtId} `
     await database.run(deleteDistrictQuery)
